@@ -33,9 +33,12 @@
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newSessionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openSessionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.bestLapToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.meanToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.standardDeviationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.splitContainerMain = new System.Windows.Forms.SplitContainer();
             this.splitContainerLaps = new System.Windows.Forms.SplitContainer();
-            this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sessionGraph = new CuicaRacingDashboard.SessionGraph();
             this.sessionDashboard = new CuicaRacingDashboard.SessionDashboard();
             this.sessionLaps = new CuicaRacingDashboard.SessionLaps();
@@ -87,6 +90,37 @@
             this.openSessionToolStripMenuItem.Text = "Open Session...";
             this.openSessionToolStripMenuItem.Click += new System.EventHandler(this.openSessionToolStripMenuItem_Click);
             // 
+            // viewToolStripMenuItem
+            // 
+            this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.bestLapToolStripMenuItem,
+            this.meanToolStripMenuItem,
+            this.standardDeviationToolStripMenuItem});
+            this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
+            this.viewToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.viewToolStripMenuItem.Text = "View";
+            // 
+            // bestLapToolStripMenuItem
+            // 
+            this.bestLapToolStripMenuItem.Name = "bestLapToolStripMenuItem";
+            this.bestLapToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
+            this.bestLapToolStripMenuItem.Text = "Best Lap";
+            this.bestLapToolStripMenuItem.Click += new System.EventHandler(this.bestLapToolStripMenuItem_Click);
+            // 
+            // meanToolStripMenuItem
+            // 
+            this.meanToolStripMenuItem.Name = "meanToolStripMenuItem";
+            this.meanToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
+            this.meanToolStripMenuItem.Text = "Mean";
+            this.meanToolStripMenuItem.Click += new System.EventHandler(this.meanToolStripMenuItem_Click);
+            // 
+            // standardDeviationToolStripMenuItem
+            // 
+            this.standardDeviationToolStripMenuItem.Name = "standardDeviationToolStripMenuItem";
+            this.standardDeviationToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
+            this.standardDeviationToolStripMenuItem.Text = "Standard Deviation";
+            this.standardDeviationToolStripMenuItem.Click += new System.EventHandler(this.standardDeviationToolStripMenuItem_Click);
+            // 
             // splitContainerMain
             // 
             this.splitContainerMain.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -123,17 +157,14 @@
             this.splitContainerLaps.SplitterDistance = 204;
             this.splitContainerLaps.TabIndex = 2;
             // 
-            // viewToolStripMenuItem
-            // 
-            this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
-            this.viewToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
-            this.viewToolStripMenuItem.Text = "View";
-            // 
             // sessionGraph
             // 
             this.sessionGraph.Dock = System.Windows.Forms.DockStyle.Fill;
             this.sessionGraph.Location = new System.Drawing.Point(0, 0);
             this.sessionGraph.Name = "sessionGraph";
+            this.sessionGraph.ShowBestLap = false;
+            this.sessionGraph.ShowMean = false;
+            this.sessionGraph.ShowStandardDeviation = false;
             this.sessionGraph.Size = new System.Drawing.Size(891, 321);
             this.sessionGraph.TabIndex = 0;
             // 
@@ -196,6 +227,9 @@
         private SessionLaps sessionLaps;
         private System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem bestLapToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem meanToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem standardDeviationToolStripMenuItem;
     }
 }
 

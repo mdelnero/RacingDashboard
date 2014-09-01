@@ -62,5 +62,27 @@ namespace CuicaRacingDashboard
         {
             //session.AddLap(new Lap(session.Laps.Count() + 1, 48442));
         }
+
+        private void bestLapToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bestLapToolStripMenuItem.Checked = !bestLapToolStripMenuItem.Checked;
+
+            sessionGraph.ShowBestLap = bestLapToolStripMenuItem.Checked;
+
+        }
+
+        private void meanToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            meanToolStripMenuItem.Checked = !meanToolStripMenuItem.Checked;
+
+            sessionGraph.ShowMean = meanToolStripMenuItem.Checked;
+        }
+
+        private void standardDeviationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            standardDeviationToolStripMenuItem.Checked = !standardDeviationToolStripMenuItem.Checked;
+
+            sessionGraph.ShowStandardDeviation = standardDeviationToolStripMenuItem.Checked;
+        }
     }
 }

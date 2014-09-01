@@ -16,6 +16,11 @@
         public event EventHandler<NewLapEventArgs> NewLapEvent;
 
         /// <summary>
+        /// Data Changed Event.
+        /// </summary>
+        public event EventHandler DataChangedEvent;
+
+        /// <summary>
         /// Lap List.
         /// </summary>
         private List<Lap> laps = new List<Lap>();
@@ -28,9 +33,58 @@
             get { return laps; }
         }
 
+        /// <summary>
+        /// Get Session Laps.
+        /// </summary>
+        private IList<Lap> ThresholdLaps
+        {
+            get
+            {
+                ulong best = GetBestLap().LapTime + threshold;
+
+                IList<Lap> result = new List<Lap>();
+
+                foreach (Lap l in laps)
+                {
+                    if (l.LapTime < best)
+                        result.Add(l);
+                }
+
+                return result;
+            }
+        }
+
+        /// <summary>
+        /// Statistical threshold.
+        /// </summary>
+        private ulong threshold = 3000;
+
+        /// <summary>
+        /// Gets or Sets Statistical threshold.
+        /// </summary>
+        public ulong Threshold
+        {
+            get { return threshold; }
+            set
+            {
+                threshold = value;
+
+                if (DataChangedEvent != null)
+                {
+                    DataChangedEvent(this, new EventArgs());
+                }
+            }
+        }
+
+        /// <summary>
+        /// Session Name.
+        /// </summary>
         private string sessionName;
 
-        public  string Name
+        /// <summary>
+        /// Gets Session Name.
+        /// </summary>
+        public string Name
         {
             get { return sessionName; }
             set { sessionName = value; }
@@ -103,6 +157,51 @@
                 return null;
 
             return laps.Last();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public double GetMean()
+        {
+            double s = 0;
+            int count = 0;
+
+            foreach (Lap l in ThresholdLaps)
+            {
+                s += l.LapTime;
+                count++;
+            }
+
+            return s / count;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public double GetVariance()
+        {
+            double mean = GetMean();
+
+            double variance = 0;
+
+            foreach (Lap l in ThresholdLaps)
+            {
+                variance += Math.Pow((l.LapTime - mean), 2);
+            }
+
+            return variance / laps.Count;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public double GetStandardDeviation()
+        {
+            return Math.Sqrt(GetVariance());
         }
 
         /// <summary>

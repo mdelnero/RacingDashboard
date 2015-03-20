@@ -6,7 +6,7 @@ namespace CuicaRacingDashboard
     public partial class FormMain : Form
     {
         /// <summary>
-        /// 
+        /// Racing Session
         /// </summary>
         private Session session;
 
